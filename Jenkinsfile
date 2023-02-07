@@ -1,10 +1,12 @@
 pipeline{
     agent any
-    stages("git checkout"){
-        stage{
+    stages{
+        stage("Git Check out"){
             steps{
                 git branch: 'devops', url: 'https://github.com/anuragjos/devops-automation.git'
             }
         }
     }
 }
+
+    
