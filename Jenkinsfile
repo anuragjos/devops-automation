@@ -19,6 +19,17 @@ pipeline{
                 
             }
         }
+        stage("Push Docker image to Docker Hub"){
+            steps{
+                withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_pass')]) {
+                    sh "docker login -u anuragjoshi01 -p $docker_pass"
+                    sh ' docker image push anuragjoshi01/kuberntes'
+                    
+    
+               }
+                
+            }
+        }
     }
 }
 
