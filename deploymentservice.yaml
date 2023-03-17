@@ -1,23 +1,23 @@
-kind: Deployment
+kkind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: mydeployments
+   name: springboot-k8s-deploy
 spec:
-   replicas: 1
-   selector:
+   replicas: 2
+   selector:     
     matchLabels:
-          app: springboot-k8s
-    template:
-          metadata:
-           labels:
-             app: springboot-k8s
-    spec:
-    containers:
-     - name: springboot-k8s
-       image: anuragjoshi01/kubernetes
-       imagePullPolicy: IfNotPresent
-       ports:
-       - containerPort: 8000
+     app: springboot-k8s
+   template:
+     metadata:
+       labels:
+         app: springboot-k8s
+     spec:
+      containers:
+        - name: springboot-k8s
+          image: anuragjoshi01/kubernetes
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8000
 
 ---
 kind: Service
