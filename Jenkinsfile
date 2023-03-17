@@ -20,6 +20,13 @@ stages{
                 }
             }
         }
+        stage("Deploy to Kubernetes"){
+            steps{
+                script{
+                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'kubernetes-server') 
+                }
+            }
+        }
         
     }
 }
