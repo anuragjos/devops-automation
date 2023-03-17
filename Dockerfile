@@ -1,5 +1,4 @@
 FROM openjdk:8
-COPY . .
 EXPOSE 8080
-RUN mvn install
-CMD ["java","-jar","kubernetes.jar"]
+ADD target/kubernetes.jar kubernetes.jar
+ENTRYPOINT ["java","-jar","/kubernetes.jar"]
