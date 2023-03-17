@@ -12,6 +12,14 @@ stages{
                 sh 'docker build -t anuragjoshi01/kubernetes .'
             }
         }
+        stage("Docker Push Image to Docker HUb"){
+            steps{
+                withCredentials([string(credentialsId: 'Docker-Hub', variable: 'docker_hub_password')]) {
+                    sh "docker login -u anuragjoshi01 -p ${docker_hub_password}"
+                    sh 'docker push anuragjoshi01/kubernetes'
+                }
+            }
+        }
         
     }
 }
