@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    tools{
-        maven 'maven'
+    docker {
+        image 'maven'
     }
     stages{
         stage("Git Checkout"){
