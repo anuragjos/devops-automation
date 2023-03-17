@@ -7,6 +7,11 @@ stages{
                 sh 'mvn clean install'
             }
         }
+        stage("Docker Build Image"){
+            steps{
+                sh 'docker build -t anuragjoshi01/kubernetes .'
+            }
+        }
         
     }
 }
