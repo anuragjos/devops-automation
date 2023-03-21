@@ -17,4 +17,20 @@ spec:
       image: anuragjoshi01/kubernetes:latest
       imagePullPolicy: Always
       ports: 
-      - containerPort: 
+      - containerPort: 8081
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+    name: myspringapp-svc
+    labels:
+      app: myspringbootapp
+spec:
+  selector:
+       app: myspringbootapp
+  type: LoadBalancer
+  ports:
+  - nodePort: 30036
+    port: 80
+    targetPort: 8081 
