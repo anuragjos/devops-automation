@@ -9,6 +9,14 @@ pipeline{
                 }
             }
         }
+        stage("Docker Build and Test"){
+            steps{
+                script{
+                    sh 'docker build -t anuragjoshi01/kubernetes .'
+                }
+
+            }
+        }
     }
        
 }
