@@ -1,8 +1,6 @@
 pipeline{
     agent any 
-    parameters{
-        choice(name: 'action', choices: 'create/ndestroy/destroykubernetesserver', description: 'Create/Update or destroy the kubernetesserver')
-    }
+    
     stages{
         stage("Git Checkout from SCM"){
             steps{
@@ -43,5 +41,6 @@ pipeline{
             }
         }
     }
+}
        
 
