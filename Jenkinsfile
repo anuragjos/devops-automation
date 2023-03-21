@@ -1,5 +1,8 @@
 pipeline{
     agent any 
+    parameters{
+        choice(name: 'action', choices: 'create/ndestroy/destroykubernetesserver', description: 'Create/Update or destroy the kubernetesserver')
+    }
     stages{
         stage("Git Checkout from SCM"){
             steps{
@@ -31,6 +34,27 @@ pipeline{
                 }
             }
         }
+        stage("Deploy to Kubernetes"){
+            when {expression {params.action == 'create'}}
+            steps{
+                script{
+                    def apply = false
+                    try{
+                        input message: 'please confirm to innitite the deployments', ok: 'Ready to apply the config'
+                        apply = true
+                }
+                catch(err){
+                    apply = false
+                    CurrentBuild.result = 'UNSTABLE'
+                }
+                if (apply){
+                    sh '''
+                        kubectl apply -f .
+                    '''
+                }
+            }
+        }
     }
        
+}
 }
