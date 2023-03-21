@@ -17,6 +17,20 @@ pipeline{
 
             }
         }
+        stage("Docker push"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'docker-hub-passord', variable: 'docker_hub_password')]) {
+                        sh''' 
+                        docker login -u anuragjoshi01 -p ${docker_hub_password}
+                        docker push anuragjoshi01/kubernetes
+                        '''
+
+                    }
+
+                }
+            }
+        }
     }
        
 }
