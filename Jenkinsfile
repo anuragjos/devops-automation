@@ -7,6 +7,14 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
+        stage("Docker Build and Test"){
+            steps{
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'docker_hub_password')]) {
+                      sh 'docker build -t anuragjoshi01/kubernetes .'
+                }
+                
+            }
+        }
     }
 }
         
